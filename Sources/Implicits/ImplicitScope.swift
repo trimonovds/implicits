@@ -110,7 +110,7 @@ public struct ImplicitScope: Sendable {
 extension ImplicitScope {
   /// DebugCollection represents a collection of implicit parameters available
   /// in the scope in a way suitable for debug purposes.
-  public struct DebugCollection: Collection {
+  public struct DebugCollection: Collection, CustomDebugStringConvertible {
     public typealias Element = (key: String, value: any Any, sourceLocation: SourceLocation)
     public typealias Index = Array<Element>.Index
 
@@ -133,8 +133,7 @@ extension ImplicitScope {
       entries.map(\.key)
     }
 
-    /// Returns a formatted string with locations for debugging.
-    public var formatted: String {
+    public var debugDescription: String {
       entries.map { key, value, location in
         "\(key): \(value) (defined at \(location))"
       }.joined(separator: "\n")

@@ -299,18 +299,8 @@ private func noStoreAssociatedWithCurrentContext() -> Never {
 /// Actual values are stored in subclasses of this class.
 @usableFromInline
 class EntryAbstract {
-  #if DEBUG
-  @usableFromInline
-  let sourceLocation: SourceLocation
-
-  @inlinable
-  init(sourceLocation: SourceLocation) {
-    self.sourceLocation = sourceLocation
-  }
-  #else
   @inlinable
   init() {}
-  #endif
 
   @inlinable
   deinit {}
@@ -318,5 +308,8 @@ class EntryAbstract {
   #if DEBUG
   @inlinable
   var anyValue: any Any { fatalError() }
+
+  @inlinable
+  var sourceLocation: SourceLocation { fatalError() }
   #endif
 }
